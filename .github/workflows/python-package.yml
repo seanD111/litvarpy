@@ -8,9 +8,10 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
+  workflow_dispatch:
 
 jobs:
-  build:
+  run:
 
     runs-on: ${{ matrix.os }}
     strategy:
