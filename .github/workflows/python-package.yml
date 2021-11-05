@@ -10,7 +10,7 @@ on:
     branches: [ $default-branch ]
 
 jobs:
-  run:
+  build:
 
     runs-on: ${{ matrix.os }}
     strategy:
