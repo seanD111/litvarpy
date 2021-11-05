@@ -25,5 +25,12 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
-    ]
+    ],
+    extras_require={
+        'test': [
+            'pytest',
+            'coverage',
+            'pytest-cov'
+        ],
+    },
 )
