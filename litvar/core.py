@@ -76,8 +76,8 @@ def pmids_by_rsids(rs_ids, method="GET"):
     models = []
     if method == "GET":
         rs_id_string = ",".join(rs_ids)
-        rsid_placeholder = 'rsids'
-        href = f"{PMIDS_URL}?{parse.urlencode({rsid_placeholder:rs_id_string})}"
+        param = parse.urlencode({'rsids': rs_id_string})
+        href = f"{PMIDS_URL}?{param}"
         results = json.loads(make_request(href, None))
         for result in results:
             new_model = Model(**result)
