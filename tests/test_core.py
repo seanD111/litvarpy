@@ -1,4 +1,4 @@
-import core
+from litvar import core
 
 
 class TestCore:
