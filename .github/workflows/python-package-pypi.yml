@@ -7,7 +7,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -49,6 +49,10 @@ jobs:
         fail_ci_if_error: true
 
   publish:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON: '3.7'
+    steps:
     - name: Install pypa/build
       run: >-
         python -m
