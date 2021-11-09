@@ -48,6 +48,7 @@ jobs:
       with:
         fail_ci_if_error: true
 
+  publish:
     - name: Install pypa/build
       run: >-
         python -m
