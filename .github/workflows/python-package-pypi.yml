@@ -5,8 +5,12 @@ name: Python package
 
 on:
   push:
+    tags:
+      - '*'
     branches: [ main ]
   pull_request:
+    tags:
+      - '*'
     branches: [ main ]
   workflow_dispatch:
 
