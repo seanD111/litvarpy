@@ -49,10 +49,16 @@ jobs:
         fail_ci_if_error: true
 
   publish:
+    needs: build
     runs-on: ubuntu-latest
     env:
       PYTHON: '3.7'
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
     - name: Install pypa/build
       run: >-
         python -m
