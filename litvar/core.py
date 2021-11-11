@@ -37,6 +37,11 @@ INFO_URL = "https://www.ncbi.nlm.nih.gov/research/bionlp/litvar/api/v1/entity/li
 
 
 def variation_search(query):
+    '''
+    Search for all LitVar variants by query search of related concepts
+    :param query:  search term. can be gene or variant
+    :return:
+    '''
     results = json.loads(make_request(SEARCH_URL + query, None))
     models = []
     for result in results:
@@ -46,6 +51,11 @@ def variation_search(query):
 
 
 def variation_information(var_id):
+    '''
+    Return variation information given its VarId
+    :param var_id: VarId of the variant
+    :return: 
+    '''
     results = json.loads(make_request(INFO_URL + var_id, None))
     models = []
     if not isinstance(results, list):
