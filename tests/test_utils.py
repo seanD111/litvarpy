@@ -1,5 +1,5 @@
-from litvar import utils
-from litvar import core
+from src.litvar import utils
+from src.litvar import core
 
 
 class TestUtils:
