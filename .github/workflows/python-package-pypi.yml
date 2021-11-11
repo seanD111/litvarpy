@@ -5,9 +5,13 @@ name: Python package
 
 on:
   push:
+    tags:
+      - '*'
     branches: [ main ]
   pull_request:
-    branches: [ main]
+    tags:
+      - '*'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -42,9 +46,41 @@ jobs:
       run: |
         pip install pytest
         pip install pytest-cov
-        pytest --cov=litvar --cov-report=xml
+        pytest --cov=src/litvar --cov-report=xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: true
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      PYTHON: '3.7'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.7'
+    - name: Install pypa/build
+      run: >-
+        python -m
+        pip install
+        build
+        --user
+    - name: Build a binary wheel and a source tarball
+      run: >-
+        python -m
+        build
+        --sdist
+        --wheel
+        --outdir dist/
+    - name: Publish distribution 📦 to Test PyPI
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/
 
